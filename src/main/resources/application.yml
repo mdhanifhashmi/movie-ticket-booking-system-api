@@ -3,9 +3,9 @@ spring:
     name: movie-ticket-booking-system-api
   #DATABASE CONFIGURATION
   datasource:
-    url: mysql://localhost:3306/springboot_movie_ticket_db?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/springboot_movie_ticket_db?createDatabaseIfNotExist=true
     username: root
-    password: Hanzo@25
+    password: Hanzo@2591
   jpa:
     open-in-view: false
     show-sql: true
