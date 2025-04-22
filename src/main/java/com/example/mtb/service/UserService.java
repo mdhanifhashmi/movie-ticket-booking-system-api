@@ -4,7 +4,7 @@ import com.example.mtb.entity.UserDetail;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-@Service
+
 public interface UserService
 {
 

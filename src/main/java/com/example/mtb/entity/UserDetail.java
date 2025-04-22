@@ -19,7 +19,10 @@ public class UserDetail {
     private String username;
     private String email;
     private String password;
+
+    @Enumerated(EnumType.STRING)
     private UserRole userRole;
+
     private String phoneNumber;
     private LocalDate dateOfBirth;
     private long createdAt;
