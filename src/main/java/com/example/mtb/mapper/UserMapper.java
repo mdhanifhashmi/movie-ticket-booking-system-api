@@ -1,6 +1,7 @@
 package com.example.mtb.mapper;
 
-import com.example.mtb.dto.UserRegistrationRequest;
+import com.example.mtb.dto.user.UserRegistrationRequest;
+import com.example.mtb.dto.user.UserResponse;
 import com.example.mtb.entity.UserDetail;
 import org.springframework.stereotype.Component;
 
@@ -16,5 +17,17 @@ public class UserMapper {
         user.setDateOfBirth(source.dateOfBirth());
 
         return user;
+    }
+
+    public UserResponse toResponse(UserDetail userDetail) {
+
+        return new UserResponse(
+                userDetail.getUserId(),
+                userDetail.getUsername(),
+                userDetail.getEmail(),
+                userDetail.getPhoneNumber(),
+                userDetail.getDateOfBirth(),
+                userDetail.getUserRole()
+        );
     }
 }
