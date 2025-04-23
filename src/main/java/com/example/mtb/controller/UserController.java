@@ -5,6 +5,7 @@ import com.example.mtb.entity.UserDetail;
 import com.example.mtb.service.UserService;
 import com.example.mtb.utility.ResponseStructure;
 import com.example.mtb.utility.RestResponseBuilder;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class UserController {
     private final RestResponseBuilder responseBuilder;
 
     @PostMapping("/register")
-    public ResponseEntity<ResponseStructure<UserDetail>> addUser(@RequestBody UserRegistrationRequest userRegistrationRequest){
+    public ResponseEntity<ResponseStructure<UserDetail>> addUser(@RequestBody @Valid UserRegistrationRequest userRegistrationRequest){
 
         UserDetail userDetail1= userService.saveUser(userRegistrationRequest);
         return responseBuilder.Success(HttpStatus.CREATED, "User created successfully", userDetail1);
