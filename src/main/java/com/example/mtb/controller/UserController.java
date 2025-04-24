@@ -20,11 +20,7 @@ public class UserController {
     private final RestResponseBuilder responseBuilder;
 
     @PostMapping("/register")
-<<<<<<< HEAD
-    public ResponseEntity<ResponseStructure<UserResponse>> addUser(@RequestBody UserRegistrationRequest userRegistrationRequest){
-=======
-    public ResponseEntity<ResponseStructure<UserDetail>> addUser(@RequestBody @Valid UserRegistrationRequest userRegistrationRequest){
->>>>>>> f084f5e3f0f90e8f828ae614ea5476656165b741
+    public ResponseEntity<ResponseStructure<UserResponse>> addUser(@RequestBody @Valid UserRegistrationRequest userRegistrationRequest){
 
         UserResponse userResponse = userService.saveUser(userRegistrationRequest);
 
