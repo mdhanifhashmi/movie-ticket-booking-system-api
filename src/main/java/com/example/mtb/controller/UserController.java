@@ -27,7 +27,7 @@ public class UserController {
         return responseBuilder.success(HttpStatus.CREATED, "User created successfully", userResponse);
     }
 
-    @PutMapping("/users/profile")
+    @PutMapping("/users")
     public ResponseEntity<ResponseStructure<UserRequest>> updateUser(
             @RequestParam String email, @RequestBody UserRequest userRequest){
 
