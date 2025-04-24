@@ -1,4 +1,4 @@
-package com.example.mtb.dto;
+package com.example.mtb.dto.user;
 
 import com.example.mtb.enums.UserRole;
 import jakarta.validation.constraints.Email;

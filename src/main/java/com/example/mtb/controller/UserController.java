@@ -1,7 +1,8 @@
 package com.example.mtb.controller;
 
-import com.example.mtb.dto.UserRegistrationRequest;
-import com.example.mtb.entity.UserDetail;
+import com.example.mtb.dto.user.UserRegistrationRequest;
+import com.example.mtb.dto.user.UserRequest;
+import com.example.mtb.dto.user.UserResponse;
 import com.example.mtb.service.UserService;
 import com.example.mtb.utility.ResponseStructure;
 import com.example.mtb.utility.RestResponseBuilder;
@@ -9,10 +10,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
@@ -22,10 +20,19 @@ public class UserController {
     private final RestResponseBuilder responseBuilder;
 
     @PostMapping("/register")
-    public ResponseEntity<ResponseStructure<UserDetail>> addUser(@RequestBody @Valid UserRegistrationRequest userRegistrationRequest){
+    public ResponseEntity<ResponseStructure<UserResponse>> addUser(@RequestBody @Valid UserRegistrationRequest userRegistrationRequest){
 
-        UserDetail userDetail1= userService.saveUser(userRegistrationRequest);
-        return responseBuilder.Success(HttpStatus.CREATED, "User created successfully", userDetail1);
+        UserResponse userResponse = userService.saveUser(userRegistrationRequest);
+
+        return responseBuilder.success(HttpStatus.CREATED, "User created successfully", userResponse);
+    }
+
+    @PutMapping("/users")
+    public ResponseEntity<ResponseStructure<UserRequest>> updateUser(
+            @RequestParam String email, @RequestBody UserRequest userRequest){
+
+        UserRequest userRequest1 = userService.updateUserProfile(email, userRequest);
+         return  responseBuilder.success(HttpStatus.OK, "User updates successfully", userRequest1 );
     }
 
 }
