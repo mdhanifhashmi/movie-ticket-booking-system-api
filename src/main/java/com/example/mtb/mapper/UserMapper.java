@@ -22,7 +22,7 @@ public class UserMapper {
     public UserResponse toResponse(UserDetail userDetail) {
 
         return new UserResponse(
-                userDetail.getUserId(),
+//                userDetail.getUserId(),
                 userDetail.getUsername(),
                 userDetail.getEmail(),
                 userDetail.getPhoneNumber(),
