@@ -8,10 +8,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TheaterMapper {
-    public Theater toEntity(TheaterRequest theaterRequest, TheaterOwner theaterOwner) {
+    public Theater toEntity(TheaterRequest theaterRequest) {
         Theater newTheater = new Theater();
-
-        newTheater.setTheaterOwner(theaterOwner);
 
         newTheater.setName(theaterRequest.name());
         newTheater.setAddress(theaterRequest.address());
@@ -19,6 +17,13 @@ public class TheaterMapper {
         newTheater.setLandmark(theaterRequest.landmark());
 
         return  newTheater;
+    }
+
+    public void toEntity(TheaterRequest source, Theater theater) {
+        theater.setName(source.name());
+        theater.setAddress(source.address());
+        theater.setCity(source.city());
+        theater.setLandmark(source.landmark());
     }
 
     public TheaterResponse toResponse(Theater theater) {
