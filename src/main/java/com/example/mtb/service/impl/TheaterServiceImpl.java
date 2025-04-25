@@ -5,6 +5,7 @@ import com.example.mtb.dto.theater.TheaterResponse;
 import com.example.mtb.entity.Theater;
 import com.example.mtb.entity.TheaterOwner;
 import com.example.mtb.entity.UserDetail;
+import com.example.mtb.exception.TheaterNotFoundException;
 import com.example.mtb.exception.UserNotFoundException;
 import com.example.mtb.mapper.TheaterMapper;
 import com.example.mtb.repository.TheaterRepository;
@@ -37,6 +38,15 @@ public class TheaterServiceImpl implements TheaterService {
 
         return theaterMapper.toResponse(theater);
 
+    }
+
+    @Override
+    public TheaterResponse findTheater(String theaterId) {
+        if (theaterRepository.existsById(theaterId)) {
+            Theater theater = theaterRepository.findById(theaterId).get();
+            return  theaterMapper.toResponse(theater);
+        }
+        throw new TheaterNotFoundException("Theater does not exist");
     }
 
 
