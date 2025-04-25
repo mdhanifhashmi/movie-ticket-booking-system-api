@@ -3,6 +3,7 @@ package com.example.mtb.controller;
 import com.example.mtb.dto.user.UserRegistrationRequest;
 import com.example.mtb.dto.user.UserRequest;
 import com.example.mtb.dto.user.UserResponse;
+import com.example.mtb.entity.Theater;
 import com.example.mtb.service.UserService;
 import com.example.mtb.utility.ResponseStructure;
 import com.example.mtb.utility.RestResponseBuilder;
@@ -34,5 +35,6 @@ public class UserController {
         UserRequest userRequest1 = userService.updateUserProfile(email, userRequest);
          return  responseBuilder.success(HttpStatus.OK, "User updates successfully", userRequest1 );
     }
+
 
 }
