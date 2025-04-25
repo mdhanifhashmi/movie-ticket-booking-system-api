@@ -31,5 +31,11 @@ public class theaterController {
         return restResponseBuilder.success(HttpStatus.FOUND, "theater found in database", theaterResponse);
     }
 
+    @PutMapping("/theater/{theaterId}")
+    public ResponseEntity<ResponseStructure<TheaterResponse>> updateTheater(@PathVariable String theaterId, @RequestBody TheaterRequest theaterRequest){
+        TheaterResponse theaterResponse = theaterService.updateTheater(theaterId, theaterRequest);
+        return restResponseBuilder.success(HttpStatus.OK, "Theater details scuccessfully updates", theaterResponse);
+    }
+
 }
 

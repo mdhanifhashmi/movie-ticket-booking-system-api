@@ -30,7 +30,7 @@ public class UserController {
 
     @PutMapping("/users")
     public ResponseEntity<ResponseStructure<UserRequest>> updateUser(
-            @RequestParam String email, @RequestBody UserRequest userRequest){
+            @RequestParam String email, @RequestBody @Valid UserRequest userRequest){
 
         UserRequest userRequest1 = userService.updateUserProfile(email, userRequest);
          return  responseBuilder.success(HttpStatus.OK, "User updates successfully", userRequest1 );

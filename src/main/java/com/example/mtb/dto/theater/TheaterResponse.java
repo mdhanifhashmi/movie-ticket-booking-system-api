@@ -4,7 +4,7 @@ public record TheaterResponse (
         String name,
         String address,
         String city,
-        String Landmark
+        String landmark
 
 ) {
 }

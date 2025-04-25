@@ -14,6 +14,8 @@ import com.example.mtb.service.TheaterService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import static java.util.Collections.copy;
+
 @Service
 @AllArgsConstructor
 public class TheaterServiceImpl implements TheaterService {
@@ -25,28 +27,35 @@ public class TheaterServiceImpl implements TheaterService {
     @Override
     public TheaterResponse saveTheater(String email, TheaterRequest theaterRequest) {
         UserDetail userDetail = userRepository.findByEmail(email);
-        //Downcast to theater_owner
-        TheaterOwner theaterOwner = (TheaterOwner) userDetail;
 
-        if (userDetail == null){
+        if (userDetail instanceof TheaterOwner theaterOwner) {
+            Theater theater = theaterMapper.toEntity(theaterRequest);
+            theater.setTheaterOwner(theaterOwner);
+
+            theaterRepository.save(theater);
+            return theaterMapper.toResponse(theater);
+
+        } else
             throw new UserNotFoundException("Theater Owner doesn't exist");
-        }
-
-        Theater theater = theaterMapper.toEntity(theaterRequest, theaterOwner);
-
-        theaterRepository.save(theater);
-
-        return theaterMapper.toResponse(theater);
 
     }
 
     @Override
     public TheaterResponse findTheater(String theaterId) {
-        if (theaterRepository.existsById(theaterId)) {
-            Theater theater = theaterRepository.findById(theaterId).get();
-            return  theaterMapper.toResponse(theater);
-        }
-        throw new TheaterNotFoundException("Theater does not exist");
+        Theater theater = theaterRepository.findById(theaterId)
+                .orElseThrow(() -> new TheaterNotFoundException("Theater does not exist in database"));
+        return theaterMapper.toResponse(theater);
+    }
+
+    @Override
+    public TheaterResponse updateTheater(String theaterId, TheaterRequest theaterRequest) {
+        Theater theater = theaterRepository.findById(theaterId)
+                .orElseThrow(() -> new TheaterNotFoundException("Theater does not exist in database"));
+
+        theaterMapper.toEntity(theaterRequest, theater);
+        theaterRepository.save(theater);
+
+        return theaterMapper.toResponse(theater);
     }
 
 
