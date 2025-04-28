@@ -10,6 +10,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +23,7 @@ public class ScreenController {
     private final ScreenService screenService;
     private final RestResponseBuilder restResponseBuilder;
 
+    @PreAuthorize("hasAuthority('THEATER_OWNER')")
     @PostMapping("/theaters/{theaterId}/Screens")
     public ResponseEntity<ResponseStructure<ScreenResponse>> saveScreen (@PathVariable String theaterId, @RequestBody @Valid ScreenRequest screenRequest){
         ScreenResponse screenResponse = screenService.saveScreen(theaterId, screenRequest);
