@@ -6,6 +6,7 @@ import com.example.mtb.dto.user.UserResponse;
 import com.example.mtb.entity.TheaterOwner;
 import com.example.mtb.entity.User;
 import com.example.mtb.entity.UserDetail;
+import com.example.mtb.exception.InvalidDataInsertionException;
 import com.example.mtb.exception.UserExistByEmailException;
 import com.example.mtb.exception.UserNotFoundException;
 import com.example.mtb.mapper.UserMapper;
@@ -37,7 +38,11 @@ public class UserServiceImpl implements UserService {
 
         UserDetail userDetail = userMapper.toEntity(newUser, userRegistrationRequest);
 
-        userRepository.save(userDetail);
+        try {
+            userRepository.save(userDetail);
+        } catch (Exception e) {
+            throw new InvalidDataInsertionException(e.getMessage());
+        }
 
         return userMapper.toResponse(userDetail);
     }
