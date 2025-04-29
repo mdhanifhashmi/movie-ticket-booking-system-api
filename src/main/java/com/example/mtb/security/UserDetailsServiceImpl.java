@@ -17,12 +17,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-
         //UserDetail userDetail = userRepository.findByEmail(username);
         /*we are fetching the user from database in this case it is in repo
         * Important point: UserDetails and UserDetail are different UserDetail is from spring security and
-        * userDetail is fro entity package
+        * userDetail is for entity package
         * */
         UserDetail userDetail = userRepository.findByEmail(username);
         if (userDetail == null){

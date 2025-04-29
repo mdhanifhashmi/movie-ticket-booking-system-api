@@ -33,7 +33,6 @@ public class SecurityConfig {
 
         //retrun
         return httpSecurity.build();
-
     }
 
     @Bean
