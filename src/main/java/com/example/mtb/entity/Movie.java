@@ -45,4 +45,8 @@ public class Movie {
     @Column(name = "genre",nullable = false)
     @Enumerated(value = EnumType.STRING)
     private Genre genre;
+
+
+    @OneToMany
+    private List<Show> shows;
 }

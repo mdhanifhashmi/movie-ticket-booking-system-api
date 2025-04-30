@@ -55,4 +55,7 @@ public class Screen {
     @OneToMany(mappedBy = "screen", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     List<Seat> seats = new ArrayList<>();
 
+    @OneToMany
+    private List<Show> shows;
+
 }

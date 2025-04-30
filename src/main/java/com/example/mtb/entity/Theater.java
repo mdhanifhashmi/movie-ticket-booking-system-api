@@ -58,4 +58,7 @@ public class Theater {
     @LastModifiedBy
     @Column(name = "updated_by")
     private String updatedBy;
+
+    @OneToMany(mappedBy = "theater", fetch = FetchType.EAGER)
+    private List<Show> shows;
 }
