@@ -73,7 +73,16 @@ public class UserServiceImpl implements UserService {
         return userRequest;
     }
 
+    @Override
+    public UserResponse softDelete(String email) {
+        UserDetail userDetail = userRepository.findByEmail(email);
+        if (userDetail == null){
+            throw new UserNotFoundException("User Doest not exist in Database by email:"+email);
+        }
+        userDetail.setDelete(true);
+        userRepository.save(userDetail);
 
-
+        return userMapper.toResponse(userDetail);
+    }
 
 }
