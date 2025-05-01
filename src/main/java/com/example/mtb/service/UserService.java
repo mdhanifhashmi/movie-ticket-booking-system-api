@@ -15,4 +15,5 @@ public interface UserService
     UserRequest updateUserProfile(String email, UserRequest userRequest);
 
 
+    UserResponse softDelete(String email);
 }
