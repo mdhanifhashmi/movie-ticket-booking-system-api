@@ -4,13 +4,11 @@ import com.example.mtb.enums.ScreenType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.boot.autoconfigure.web.WebProperties;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.security.PrivateKey;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +53,7 @@ public class Screen {
     @OneToMany(mappedBy = "screen", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     List<Seat> seats = new ArrayList<>();
 
-    @OneToMany
+    @OneToMany(mappedBy = "screen")
     private List<Show> shows;
 
 }

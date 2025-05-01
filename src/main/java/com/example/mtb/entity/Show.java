@@ -6,13 +6,16 @@ import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 
 import java.time.Instant;
 
 @Entity
 @Setter
 @Getter
-@Table(name = "show")
+@Table(name = "shows")
+@EntityListeners(AuditingEntityListener.class)
 public class Show {
 
     @Id
@@ -39,12 +42,15 @@ public class Show {
     private String createdBy;
 
     @ManyToOne
+    @JoinColumn(name = "theater_id")
     private Theater theater;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "screen_id")
     private Screen screen;
 
     @ManyToOne
+    @JoinColumn(name = "movie_id")
     private Movie movie;
 
 }

@@ -46,7 +46,6 @@ public class Movie {
     @Enumerated(value = EnumType.STRING)
     private Genre genre;
 
-
-    @OneToMany
+    @OneToMany(mappedBy = "movie")
     private List<Show> shows;
 }

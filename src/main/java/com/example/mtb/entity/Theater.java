@@ -1,7 +1,6 @@
 package com.example.mtb.entity;
 
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
@@ -49,11 +48,11 @@ public class Theater {
 
     @LastModifiedDate
     @Column(name = "updated_at")
-    private Long updatedAt;
+    private Instant updatedAt;
 
     @CreatedBy
     @Column(name = "created_by", updatable = false, nullable = false)
-    private String createBy;
+    private String createdBy;
 
     @LastModifiedBy
     @Column(name = "updated_by")
