@@ -27,9 +27,8 @@ public class theaterController {
 
     }
 
-
     @GetMapping("theater/{theaterId}")
-    public ResponseEntity<ResponseStructure<TheaterResponse>> fetchTheater(@PathVariable String theaterId){
+    public ResponseEntity<ResponseStructure<TheaterResponse>> findTheater(@PathVariable String theaterId){
         TheaterResponse theaterResponse = theaterService.findTheater(theaterId);
         return restResponseBuilder.success(HttpStatus.FOUND, "theater found in database", theaterResponse);
     }
