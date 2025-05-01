@@ -46,6 +46,9 @@ public class UserDetail {
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
+    @Column(name = "is_delete")
+    private boolean isDelete;
+
     @CreatedDate
     @Column(name = "created_at", updatable = false, nullable = false)
     private Instant createdAt;
