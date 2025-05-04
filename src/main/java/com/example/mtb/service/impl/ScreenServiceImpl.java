@@ -5,6 +5,7 @@ import com.example.mtb.dto.screen.ScreenResponse;
 import com.example.mtb.entity.Screen;
 import com.example.mtb.entity.Seat;
 import com.example.mtb.entity.Theater;
+import com.example.mtb.exception.ScreenNotFoundException;
 import com.example.mtb.exception.TheaterNotFoundException;
 import com.example.mtb.mapper.ScreenMapper;
 import com.example.mtb.repository.ScreenRepository;
@@ -41,6 +42,15 @@ public class ScreenServiceImpl implements ScreenService {
         return  screenMapper.toResponse(screen);
     }
 
+    @Override
+    public ScreenResponse findScreen(String theaterId, String screenId) {
+        if (theaterRepository.existsById(theaterId)){
+                return screenMapper.toResponse(screenRepository.findById(screenId)
+                        .orElseThrow(() -> new ScreenNotFoundException("Screen doesn't exist in database with id"+screenId)));
+        }
+        throw new TheaterNotFoundException("theater doesn't exist in database with id:"+theaterId);
+    }
+
     private List<Seat> createSeat(Screen screen) {
 
         List<Seat> seats = new LinkedList<>();
@@ -60,6 +70,7 @@ public class ScreenServiceImpl implements ScreenService {
         }
         return  seats;
     }
+
 
 
 }
