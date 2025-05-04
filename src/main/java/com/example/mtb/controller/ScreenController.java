@@ -11,10 +11,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
@@ -30,6 +27,12 @@ public class ScreenController {
         return restResponseBuilder.success(HttpStatus.CREATED, "Screen Created successfully with seat names", screenResponse );
     }
 
+    @GetMapping("theaters/{theaterId}/screens/{screenId}")
+    public ResponseEntity<ResponseStructure<ScreenResponse>> findScreen(@PathVariable String theaterId, @PathVariable String screenId){
+        ScreenResponse screenResponse = screenService.findScreen(theaterId, screenId);
+        return restResponseBuilder.success(HttpStatus.FOUND, "Screen has been fetch successfully", screenResponse);
+
+    }
 
 
 }
