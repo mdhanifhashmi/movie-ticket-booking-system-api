@@ -23,7 +23,7 @@ public class ShowController {
     public ResponseEntity<ResponseStructure<ShowResponse>> addShow(@PathVariable String theaterId, @PathVariable String screenId,
                                                                    @RequestParam String movieId,
                                                                    @RequestParam Long statsAt){
-        ShowResponse showResponse = showService.saveTheater(theaterId, screenId, movieId, statsAt);
+        ShowResponse showResponse = showService.saveShow(theaterId, screenId, movieId, statsAt);
         return restResponseBuilder.success(HttpStatus.CREATED, "Show Created successfully with seat names", showResponse);
     }
 

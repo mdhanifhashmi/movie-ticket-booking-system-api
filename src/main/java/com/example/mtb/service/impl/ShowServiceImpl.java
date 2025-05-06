@@ -10,8 +10,10 @@ import java.time.Instant;
 @Service
 @AllArgsConstructor
 public class ShowServiceImpl implements ShowService {
+
+    
     @Override
-    public ShowResponse saveTheater(String theaterId, String screenId, String movieId, Long startsAt) {
+    public ShowResponse saveShow(String theaterId, String screenId, String movieId, Long startsAt) {
 
         return null;
     }
